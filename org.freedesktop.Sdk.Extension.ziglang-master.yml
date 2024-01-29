@@ -1,0 +1,50 @@
+id: org.freedesktop.Sdk.Extension.ziglang-master
+branch: "22.08"
+runtime: org.freedesktop.Sdk
+runtime-version: "22.08"
+sdk: org.freedesktop.Sdk
+sdk-extensions: []
+build-extension: true
+separate-locales: false
+appstream-compose: false
+
+build-options:
+  prefix: /usr/lib/sdk/ziglang-master
+
+modules:
+  - name: zig
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /usr/lib/sdk/ziglang-master
+      - cp -r ./* /usr/lib/sdk/ziglang-master
+      - chmod a+x /usr/lib/sdk/ziglang-master/zig
+    sources:
+      - type: archive
+        url: https://ziglang.org/builds/zig-linux-x86_64-0.12.0-dev.2341+92211135f.tar.xz
+        sha256: 8145e518decedc2e1dfe9f55d547e4103b0dd68a2f24527c4da9f8b31b3deaba
+        only-arches:
+          - x86_64
+      - type: archive
+        url: https://ziglang.org/builds/zig-linux-aarch64-0.12.0-dev.2341+92211135f.tar.xz
+        sha256: 0d0aa58c499bd35dd72edfbbe87b50981feba56cb30b3681deb9dbd4608090f9
+        only-arches:
+          - aarch64
+
+  - name: scripts
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 enable.sh /usr/lib/sdk/ziglang-master/enable.sh
+    sources:
+      - type: script
+        commands:
+          - export PATH=$PATH:/usr/lib/sdk/ziglang-master
+        dest-filename: enable.sh
+
+  - name: metainfo
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 org.freedesktop.Sdk.Extension.ziglang-master.metainfo.xml ${FLATPAK_DEST}/share/metainfo/org.freedesktop.Sdk.Extension.ziglang-master.metainfo.xml
+      - appstream-compose --basename=org.freedesktop.Sdk.Extension.ziglang-master --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.Sdk.Extension.ziglang-master
+    sources:
+      - type: file
+        path: org.freedesktop.Sdk.Extension.ziglang-master.metainfo.xml

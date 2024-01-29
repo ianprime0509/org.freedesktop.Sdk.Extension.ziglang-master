@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="runtime">
+  <id>org.freedesktop.Sdk.Extension.ziglang-master</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+
+  <name>Zig master SDK extension</name>
+  <summary>Zig toolchain</summary>
+
+  <description>
+    <p>
+      Zig is a general-purpose programming language and toolchain for maintaining robust, optimal, and reusable software.
+      This SDK extension contains the Zig toolchain.
+    </p>
+  </description>
+
+  <url type="homepage">https://ziglang.org</url>
+  <url type="bugtracker">https://github.com/ziglang/zig/issues</url>
+
+  <releases>
+    <release version="0.12.0-dev.2341+92211135f" date="2024-01-25" />
+  </releases>
+</component>
